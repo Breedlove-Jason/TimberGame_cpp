@@ -55,6 +55,12 @@ build CMakeFiles/Timber.dir/main.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /ho
   OBJECT_DIR = CMakeFiles/Timber.dir
   OBJECT_FILE_DIR = CMakeFiles/Timber.dir
 
+build CMakeFiles/Timber.dir/Timber.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/Timber.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/Timber.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Timber
@@ -63,7 +69,7 @@ build CMakeFiles/Timber.dir/main.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /ho
 #############################################
 # Link the executable Timber
 
-build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o | /usr/lib/libsfml-graphics.so.2.6.1 /usr/lib/libsfml-audio.so.2.6.1 /usr/lib/libsfml-window.so.2.6.1 /usr/lib/libsfml-system.so.2.6.1
+build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/Timber.cpp.o | /usr/lib/libsfml-graphics.so.2.6.1 /usr/lib/libsfml-audio.so.2.6.1 /usr/lib/libsfml-window.so.2.6.1 /usr/lib/libsfml-system.so.2.6.1
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib/libsfml-graphics.so.2.6.1  /usr/lib/libsfml-audio.so.2.6.1  /usr/lib/libsfml-window.so.2.6.1  /usr/lib/libsfml-system.so.2.6.1
   OBJECT_DIR = CMakeFiles/Timber.dir

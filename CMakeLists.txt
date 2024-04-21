@@ -7,7 +7,9 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
 # Add executable target with source files listed in SOURCE_FILES variable
-add_executable(Timber main.cpp)
+add_executable(Timber main.cpp
+        Timber.cpp
+        Timber.h)
 
 # Link your application with SFML libraries
 target_link_libraries(Timber sfml-graphics sfml-audio)
