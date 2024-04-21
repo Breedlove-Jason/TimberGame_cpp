@@ -13,33 +13,37 @@ using namespace std;
 
 int main() {
 
-        // What is the player's score?
-        int playerScore = 0;
+    // What is the player's score?
+    int playerScore = 0;
 
-        // What is the player's first initial?
-        char playerInitial = 'J';
+    // What is the player's first initial?
+    char playerInitial = 'J';
 
-        //What is the value of pi?
-        const float valuePi = M_PI;
+    //What is the value of pi?
+    const float valuePi = M_PI;
 
-        // Is the player alive or dead
-        bool isAlive = true;
+    // Is the player alive or dead
+    bool isAlive = true;
 
-        // get the random number and assign it to a variable
-        int number = rand() % 100;
+    // get the random number and assign it to a variable
+    int number = rand() % 100;
+
+    // create a clock object
+    Clock clock;
 
 
-        // check graphics module is working
-        fs::path pathToImage = fs::current_path() / "graphics/background.png";
-        std::cout << "Full path to image: " << pathToImage << std::endl;
 
-        std::ifstream file(pathToImage);
-        if (file.good()) {
-            std::cout << "File exists" << std::endl;
-        } else {
-            std::cout << "File does not exist" << std::endl;
-        }
-        // Continue with the rest of your main function...
+
+    // check graphics module is working
+    fs::path pathToImage = fs::current_path() / "graphics/background.png";
+    std::cout << "Full path to image: " << pathToImage << std::endl;
+
+    std::ifstream file(pathToImage);
+    if (file.good()) {
+        std::cout << "File exists" << std::endl;
+    } else {
+        std::cout << "File does not exist" << std::endl;
+    }
     // create a video mode object
     VideoMode vm(1920, 1080);
 
@@ -53,7 +57,6 @@ int main() {
     textureBackground.loadFromFile("graphics/background.png");
 
 
-// the rest of your code...
     // create a sprite
     Sprite spriteBackground;
 
@@ -68,8 +71,7 @@ int main() {
     Texture textureTree;
     if (!textureTree.loadFromFile("graphics/tree.png")) {
         cout << "Can't load tree" << endl;
-    }
-    else {
+    } else {
         cout << "Tree loaded" << endl;
 
         textureTree.loadFromFile("graphics/tree.png");
@@ -122,7 +124,7 @@ int main() {
          * Handle the player input
          * ****************************************************
          */
-        if(Keyboard::isKeyPressed((Keyboard::Escape))) {
+        if (Keyboard::isKeyPressed((Keyboard::Escape))) {
             window.close();
         }
 
@@ -131,7 +133,37 @@ int main() {
          * Update the scene
          * ****************************************************
          */
+        Time dt = clock.restart();
 
+        // setup the bee
+        if(!beeActive){
+            // how fast is the bee
+            srand((int)time(0));
+            beeSpeed = (rand() % 200) + 200;
+
+            // how high is the bee
+            srand((int)time(0) * 10);
+            float height = (rand() % 500) + 500;
+            spriteBee.setPosition(2000, height);
+            beeActive =true;
+        }else{
+            // move the bee
+            spriteBee.setPosition(spriteBee.getPosition().x - (beeSpeed * dt.asSeconds()), spriteBee.getPosition().y);
+            if (spriteBee.getPosition().x < -100) {
+                beeActive = false;
+            }
+        }
+
+        // manage the clouds
+        // cloud 1
+        if (!cloud1Active){
+
+            // how fast is the cloud
+            srand((int) time (0) * 10);
+            float height = (rand() % 150);
+            spriteCloud1.setPosition(-200, height);
+            cloud1Active = true;
+        }
 
 
         /*
