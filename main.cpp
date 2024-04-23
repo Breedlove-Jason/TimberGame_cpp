@@ -3,6 +3,7 @@
 #include <iostream>
 #include <filesystem>
 #include <cmath>
+#include <sstream>
 #include <cstdio>
 
 #include "Timber.h"
@@ -30,19 +31,20 @@ int main() {
 
     // create a clock object
     Clock clock;
-
+    // track if game is running
+    bool paused = true;
 
 
 
     // check graphics module is working
     fs::path pathToImage = fs::current_path() / "graphics/background.png";
-    std::cout << "Full path to image: " << pathToImage << std::endl;
+    cout << "Full path to image: " << pathToImage << std::endl;
 
-    std::ifstream file(pathToImage);
+    ifstream file(pathToImage);
     if (file.good()) {
-        std::cout << "File exists" << std::endl;
+        cout << "File exists" << std::endl;
     } else {
-        std::cout << "File does not exist" << std::endl;
+        cout << "File does not exist" << std::endl;
     }
     // create a video mode object
     VideoMode vm(1920, 1080);
@@ -118,106 +120,154 @@ int main() {
     float cloud2Speed = 0.0f;
     float cloud3Speed = 0.0f;
 
+
     while (window.isOpen()) {
         /*
          * ****************************************************
          * Handle the player input
          * ****************************************************
          */
+        // draw some text
+        int score = 0;
+        Text messageText;
+        Text scoreText;
+
+        // choose a font
+        Font font;
+        font.loadFromFile("fonts/KOMIKAP_.ttf");
+
+        // set the font to message
+        messageText.setFont(font);
+        scoreText.setFont(font);
+
+        // assign the message
+        messageText.setString("Press Enter to start!");
+        scoreText.setString("Score = 0");
+
+        // enlarge font text
+        messageText.setCharacterSize(75);
+        scoreText.setCharacterSize(100);
+
+        // font color
+        messageText.setFillColor(Color::White);
+        scoreText.setFillColor(Color::White);
+
+        // position the text
+        FloatRect textRect = messageText.getLocalBounds();
+        messageText.setOrigin(textRect.left + textRect.width / 2.0f,
+                              textRect.top + textRect.height / 2.0f);
+
+        messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
+        scoreText.setPosition(20, 20);
+
         if (Keyboard::isKeyPressed((Keyboard::Escape))) {
             window.close();
         }
-
+        // start the game
+        if (Keyboard::isKeyPressed(Keyboard::Return)) {
+            paused = false;
+        }
         /*
          * ****************************************************
          * Update the scene
          * ****************************************************
          */
-        Time dt = clock.restart();
+        if (!paused) {
+            // measure time
 
-        // setup the bee
-        if(!beeActive){
-            // how fast is the bee
-            srand((int)time(0));
-            beeSpeed = (rand() % 200) + 200;
+            Time dt = clock.restart();
 
-            // how high is the bee
-            srand((int)time(0) * 10);
-            float height = (rand() % 500) + 500;
-            spriteBee.setPosition(2000, height);
-            beeActive =true;
-        }else{
-            // move the bee
-            spriteBee.setPosition(spriteBee.getPosition().x - (beeSpeed * dt.asSeconds()), spriteBee.getPosition().y);
-            if (spriteBee.getPosition().x < -100) {
-                beeActive = false;
+            // setup the bee
+            if (!beeActive) {
+                // how fast is the bee
+                srand((int) time(0));
+                beeSpeed = (rand() % 200) + 200;
+
+                // how high is the bee
+                srand((int) time(0) * 10);
+                float height = (rand() % 500) + 500;
+                spriteBee.setPosition(2000, height);
+                beeActive = true;
+            } else {
+                // move the bee
+                spriteBee.setPosition(spriteBee.getPosition().x - (beeSpeed * dt.asSeconds()),
+                                      spriteBee.getPosition().y);
+                if (spriteBee.getPosition().x < -100) {
+                    beeActive = false;
+                }
             }
-        }
 
-        // manage the clouds
-        // cloud 1
-        if (!cloud1Active){
+            // manage the clouds
+            // cloud 1
+            if (!cloud1Active) {
 
-            // how fast is the cloud
-            srand((int) time (0) * 10);
-            cloud1Speed = (rand() % 200);
+                // how fast is the cloud
+                srand((int) time(0) * 10);
+                cloud1Speed = (rand() % 200);
 
-            // how high is the cloud
-            srand((int) time (0) * 10);
-            float height = (rand() % 150);
-            spriteCloud1.setPosition(-200, height);
+                // how high is the cloud
+                srand((int) time(0) * 10);
+                float height = (rand() % 150);
+                spriteCloud1.setPosition(-200, height);
 
-            cloud1Active = true;
-        }else{
-            spriteCloud1.setPosition(spriteCloud1.getPosition().x + (cloud1Speed * dt.asSeconds()), spriteCloud1.getPosition().y);
+                cloud1Active = true;
+            } else {
+                spriteCloud1.setPosition(spriteCloud1.getPosition().x + (cloud1Speed * dt.asSeconds()),
+                                         spriteCloud1.getPosition().y);
 
-            // has the cloud reached the right hand edge of the screen?
-            if (spriteCloud1.getPosition().x > 1920){
-                cloud1Active = false;
+                // has the cloud reached the right hand edge of the screen?
+                if (spriteCloud1.getPosition().x > 1920) {
+                    cloud1Active = false;
+                }
             }
-        }
-        // cloud 2
-        if (!cloud2Active){
+            // cloud 2
+            if (!cloud2Active) {
 
-            // how fast is the cloud
-            srand((int) time (0) * 20);
-            cloud2Speed = (rand() % 200);
+                // how fast is the cloud
+                srand((int) time(0) * 20);
+                cloud2Speed = (rand() % 200);
 
-            // how high is the cloud
-            srand((int) time (0) * 20);
-            float height = (rand() % 300) - 150;
-            spriteCloud2.setPosition(-200, height);
+                // how high is the cloud
+                srand((int) time(0) * 20);
+                float height = (rand() % 300) - 150;
+                spriteCloud2.setPosition(-200, height);
 
-            cloud2Active = true;
-        }else{
-            spriteCloud2.setPosition(spriteCloud2.getPosition().x + (cloud2Speed * dt.asSeconds()), spriteCloud2.getPosition().y);
+                cloud2Active = true;
+            } else {
+                spriteCloud2.setPosition(spriteCloud2.getPosition().x + (cloud2Speed * dt.asSeconds()),
+                                         spriteCloud2.getPosition().y);
 
-            // has the cloud reached the right hand edge of the screen?
-            if (spriteCloud2.getPosition().x > 1920){
-                cloud2Active = false;
+                // has the cloud reached the right hand edge of the screen?
+                if (spriteCloud2.getPosition().x > 1920) {
+                    cloud2Active = false;
+                }
             }
-        }
-        if (!cloud3Active){
+            if (!cloud3Active) {
 
-            // how fast is the cloud
-            srand((int) time (0) * 30);
-            cloud3Speed = (rand() % 200);
+                // how fast is the cloud
+                srand((int) time(0) * 30);
+                cloud3Speed = (rand() % 200);
 
-            // how high is the cloud
-            srand((int) time (0) * 30);
-            float height = (rand() % 450) - 150;
-            spriteCloud3.setPosition(-200, height);
+                // how high is the cloud
+                srand((int) time(0) * 30);
+                float height = (rand() % 450) - 150;
+                spriteCloud3.setPosition(-200, height);
 
-            cloud3Active = true;
-        }else{
-            spriteCloud3.setPosition(spriteCloud3.getPosition().x + (cloud3Speed * dt.asSeconds()), spriteCloud3.getPosition().y);
+                cloud3Active = true;
+            } else {
+                spriteCloud3.setPosition(spriteCloud3.getPosition().x + (cloud3Speed * dt.asSeconds()),
+                                         spriteCloud3.getPosition().y);
 
-            // has the cloud reached the right hand edge of the screen?
-            if (spriteCloud3.getPosition().x > 1920){
-                cloud3Active = false;
+                // has the cloud reached the right hand edge of the screen?
+                if (spriteCloud3.getPosition().x > 1920) {
+                    cloud3Active = false;
+                }
             }
-        }
-
+            // update score text
+            stringstream ss;
+            ss << "Score = " << score;
+            scoreText.setString(ss.str());
+        } // end of if(!paused)
 
 
         /*
@@ -238,6 +288,12 @@ int main() {
         window.draw(spriteTree);
 
         window.draw(spriteBee);
+
+        // draw the score
+        window.draw(scoreText);
+        if (paused) {
+            window.draw(messageText);
+        }
 
         // show everything we just drew
         window.display();
