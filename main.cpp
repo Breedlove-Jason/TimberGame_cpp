@@ -12,6 +12,17 @@ using namespace sf;
 namespace fs = std::filesystem;
 using namespace std;
 
+// function declaration
+void updateBranches(int seed);
+
+const int NUM_BRANCHES = 6;
+Sprite branches[NUM_BRANCHES];
+
+// where is the player/branch?
+// left or right
+enum class side{ LEFT, RIGHT, NONE };
+side branchPositions[NUM_BRANCHES];
+
 int main() {
 
     // What is the player's score?
@@ -118,7 +129,7 @@ int main() {
     spriteCloud2.setTexture(textureCloud);
     spriteCloud3.setTexture(textureCloud);
 
-    // position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen// position clouds on the screen
+    // position clouds on the screen
     spriteCloud1.setPosition(0, 0);
     spriteCloud2.setPosition(0, 250);
     spriteCloud3.setPosition(0, 500);
@@ -133,7 +144,47 @@ int main() {
     float cloud2Speed = 0.0f;
     float cloud3Speed = 0.0f;
 
+    // prepare the player
+    Texture texturePlayer;
+    texturePlayer.loadFromFile("graphics/player.png");
+    Sprite spritePlayer;
+    spritePlayer.setTexture(texturePlayer);
+    spritePlayer.setPosition(580, 720);
 
+    // player starts on left
+    side playerSide = side::LEFT;
+
+    // prepare the gravestone
+    Texture textureRIP;
+    textureRIP.loadFromFile("graphics/rip.png");
+    Sprite spriteRIP;
+    spriteRIP.setTexture(textureRIP);
+    spriteRIP.setPosition(600, 860);
+
+    // prepare the axe
+    Texture textureAxe;
+    textureAxe.loadFromFile("graphics/axe.png");
+    Sprite spriteAxe;
+    spriteAxe.setTexture(textureAxe);
+    spriteAxe.setPosition(700, 830);
+
+    // align axe with tree
+    const float AXE_POSITION_LEFT = 700;
+    const float AXE_POSITION_RIGHT = 1075;
+
+    // prepare the flying log
+    Texture textureLog;
+    textureLog.loadFromFile("graphics/log.png");
+    Sprite spriteLog;
+    spriteLog.setTexture(textureLog);
+    spriteLog.setPosition(810, 720);
+
+    // log related variables
+    bool logActive = false;
+    float logSpeedX = 1000;
+    float logSpeedY = -1500;
+
+    // game loop
     while (window.isOpen()) {
         /*
          * ****************************************************
@@ -172,6 +223,17 @@ int main() {
 
         messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
         scoreText.setPosition(20, 20);
+
+        // prepare the 6 branches
+        Texture textureBranch;
+        textureBranch.loadFromFile("graphics/branch.png");
+
+        // set the texture for each branch sprite
+        for(int i = 0; i < NUM_BRANCHES; i++) {
+            branches[i].setTexture(textureBranch);
+            branches[i].setPosition(-2000, -2000);
+            branches[i].setOrigin(220, 20);
+        }
 
         if (Keyboard::isKeyPressed((Keyboard::Escape))) {
             window.close();
@@ -303,6 +365,25 @@ int main() {
             stringstream ss;
             ss << "Score = " << score;
             scoreText.setString(ss.str());
+
+            // update the branch sprites
+            for (int i = 0; i < NUM_BRANCHES; i++) {
+                float height = i * 150;
+                if (branchPositions[i] == side::LEFT) {
+                    // move the sprite to the left side
+                    branches[i].setPosition(610, height);
+                    // flip the sprite round the other way
+                    branches[i].setRotation(180);
+                } else if (branchPositions[i] == side::RIGHT) {
+                    // move the sprite to the right side
+                    branches[i].setPosition(1330, height);
+                    // set the sprite rotation to normal
+                    branches[i].setRotation(0);
+                } else {
+                    // hide the branch
+                    branches[i].setPosition(3000, height);
+                }
+            }
         } // end of if(!paused)
 
 
@@ -321,7 +402,32 @@ int main() {
         window.draw(spriteCloud2);
         window.draw(spriteCloud3);
 
+        // draw branches
+        for (int i = 0; i < NUM_BRANCHES; i++) {
+            window.draw(branches[i]);
+        }
+        updateBranches(1);
+        updateBranches(2);
+        updateBranches(3);
+        updateBranches(4);
+        updateBranches(5);
+
+        // draw tree
         window.draw(spriteTree);
+
+        // draw player
+        window.draw(spritePlayer);
+
+        // draw axe
+        window.draw(spriteAxe);
+
+        // draw log
+        window.draw(spriteLog);
+
+        // draw gravestone
+        window.draw(spriteRIP);
+
+
         window.draw(timeBar);
 
         window.draw(spriteBee);
@@ -338,4 +444,26 @@ int main() {
     }
 
     return 0;
+}
+
+void updateBranches(int seed) {
+    // move all the branches down one place
+    for (int j = NUM_BRANCHES - 1; j > 0; j--) {
+        branchPositions[j] = branchPositions[j - 1];
+    }
+
+    // spawn a new branch at position 0
+    srand((int) time(0) + seed);
+    int r = (rand() % 5);
+    switch (r) {
+        case 0:
+            branchPositions[0] = side::LEFT;
+            break;
+        case 1:
+            branchPositions[0] = side::RIGHT;
+            break;
+        default:
+            branchPositions[0] = side::NONE;
+            break;
+    }
 }
