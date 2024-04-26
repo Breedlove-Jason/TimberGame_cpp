@@ -10,14 +10,13 @@ using namespace sf;
 namespace fs = std::filesystem;
 using namespace std;
 
-// function declaration
+// function header
 void updateBranches(int seed);
 
 const int NUM_BRANCHES = 6;
 Sprite branches[NUM_BRANCHES];
 
 // where is the player/branch?
-// left or right
 enum class side {
     LEFT, RIGHT, NONE
 };
@@ -29,20 +28,14 @@ int main() {
 
     int score = 0;
 
-    // choose a font
     Font font;
     font.loadFromFile("fonts/KOMIKAP_.ttf");
-    // draw some text
     Text messageText;
     Text scoreText;
-
-    // What is the player's first initial?
-    char playerInitial = 'J';
 
     //What is the value of pi?
     const float valuePi = M_PI;
 
-    // Is the player alive or dead
     bool isAlive = true;
 
     // get the random number and assign it to a variable
@@ -196,8 +189,8 @@ int main() {
     Texture textureExtraTree;
     textureExtraTree.loadFromFile("graphics/tree2.png");
     Sprite extraTree1(textureExtraTree), extraTree2(textureExtraTree);
-    extraTree1.setPosition(300, 0);
-    extraTree2.setPosition(1400, 0);
+    extraTree1.setPosition(300, -125);
+    extraTree2.setPosition(1400, -200);
 
 // Initialize FPS variables and text
     Clock fpsClock;
@@ -515,43 +508,22 @@ int main() {
         window.draw(spriteCloud1);
         window.draw(spriteCloud2);
         window.draw(spriteCloud3);
-
-        // draw branches
         for (auto &branch: branches) {
             window.draw(branch);
         }
-
-
-        // draw tree
         window.draw(spriteTree);
-
-        // Drawing extra trees
         window.draw(extraTree1);
         window.draw(extraTree2);
-
-        // draw player
         window.draw(spritePlayer);
-
-        // draw axe
         window.draw(spriteAxe);
-
-        // draw log
         window.draw(spriteLog);
-
-        // draw gravestone
         window.draw(spriteRIP);
-
-
         window.draw(timeBar);
-
         window.draw(spriteBee);
-
-        // draw the score
         window.draw(scoreText);
         if (paused) {
             window.draw(messageText);
         }
-
 
         float currentTime = fpsClock.restart().asSeconds();
         float fps = 1.f / currentTime;

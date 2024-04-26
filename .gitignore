@@ -1,4 +1,5 @@
 ### C++ template
+
 # Prerequisites
 *.d
 
@@ -32,3 +33,29 @@
 *.out
 *.app
 
+# JetBrains CLion specific
+.idea/
+*.iml
+cmake-build-*/
+
+# Build Folders (keep the folder itself but not the content)
+*/build/
+*/bin/
+*/obj/
+
+# Dependency directories (e.g., node_modules in Web projects)
+# /node_modules/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
