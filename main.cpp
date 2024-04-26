@@ -5,9 +5,6 @@
 #include <filesystem>
 #include <cmath>
 #include <sstream>
-#include <cstdio>
-
-#include "Timber.h"
 
 using namespace sf;
 namespace fs = std::filesystem;
@@ -30,12 +27,11 @@ int main() {
     // random seed
     srand(static_cast<unsigned int>(time(nullptr)));  // Seed random number generator
 
-
-    // What is the player's score?
-
     int score = 0;
-    //    int playerScore = 0;
 
+    // choose a font
+    Font font;
+    font.loadFromFile("fonts/KOMIKAP_.ttf");
     // draw some text
     Text messageText;
     Text scoreText;
@@ -70,8 +66,6 @@ int main() {
     // track if game is running
     bool paused = true;
 
-
-
     // check graphics module is working
     fs::path pathToImage = fs::current_path() / "graphics/background.png";
     cout << "Full path to image: " << pathToImage << std::endl;
@@ -93,7 +87,6 @@ int main() {
 
     // load a graphic into the texture
     textureBackground.loadFromFile("graphics/background.png");
-
 
     // create a sprite
     Sprite spriteBackground;
@@ -199,7 +192,20 @@ int main() {
     // control player input
     bool acceptInput = false;
 
-    // play the sounds
+    // After loading textures and setting up sprites
+    Texture textureExtraTree;
+    textureExtraTree.loadFromFile("graphics/tree2.png");
+    Sprite extraTree1(textureExtraTree), extraTree2(textureExtraTree);
+    extraTree1.setPosition(300, 0);
+    extraTree2.setPosition(1400, 0);
+
+// Initialize FPS variables and text
+    Clock fpsClock;
+    Text fpsText;
+    fpsText.setFont(font);
+    fpsText.setCharacterSize(24);
+    fpsText.setFillColor(Color::White);
+    fpsText.setPosition(50, 50);  // Position the FPS counter on the screen
 
     // chopping sound
     SoundBuffer chopBuffer;
@@ -238,11 +244,6 @@ int main() {
             }
         }
 
-
-        // choose a font
-        Font font;
-        font.loadFromFile("fonts/KOMIKAP_.ttf");
-
         // set the font to message
         messageText.setFont(font);
         scoreText.setFont(font);
@@ -272,10 +273,10 @@ int main() {
         textureBranch.loadFromFile("graphics/branch.png");
 
         // set the texture for each branch sprite
-        for (int i = 0; i < NUM_BRANCHES; i++) {
-            branches[i].setTexture(textureBranch);
-            branches[i].setPosition(-2000, -2000);
-            branches[i].setOrigin(220, 20);
+        for (auto & branch : branches) {
+            branch.setTexture(textureBranch);
+            branch.setPosition(-2000, -2000);
+            branch.setOrigin(220, 20);
         }
 
         if (Keyboard::isKeyPressed((Keyboard::Escape))) {
@@ -332,7 +333,6 @@ int main() {
                 chop.play();
             }
         }
-        //HERE-----------------------------------------------
         /*
          * ****************************************************
          * Update the scene
@@ -486,32 +486,20 @@ int main() {
                 }
             }
             // has the player been squished by a branch?
-            if(branchPositions[5] == playerSide){
+            if (branchPositions[5] == playerSide) {
                 paused = true;
                 acceptInput = false;
 
-                // draw gravestone
+                // Display gravestone and update the message
                 spriteRIP.setPosition(525, 760);
-
-                // hide player
-                spritePlayer.setPosition(2000, 660);
-
-                // change message
+                spritePlayer.setPosition(2000, 660);  // Hide player
                 messageText.setString("SQUISHED!!");
-
-                // center message
                 FloatRect textRect = messageText.getLocalBounds();
-                messageText.setOrigin(textRect.left + textRect.width / 2.0f,
-                                      textRect.top + textRect.height / 2.0f);
-
+                messageText.setOrigin(textRect.width / 2, textRect.height / 2);
                 messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
-
-                // play death sound
                 death.play();
             }
-
         } // end of if(!paused)
-
 
         /*
          * ****************************************************
@@ -533,15 +521,13 @@ int main() {
             window.draw(branch);
         }
 
-        // temp test code
-//        updateBranches(1);
-//        updateBranches(2);
-//        updateBranches(3);
-//        updateBranches(4);
-//        updateBranches(5);
 
         // draw tree
         window.draw(spriteTree);
+
+        // Drawing extra trees
+        window.draw(extraTree1);
+        window.draw(extraTree2);
 
         // draw player
         window.draw(spritePlayer);
@@ -565,6 +551,12 @@ int main() {
         if (paused) {
             window.draw(messageText);
         }
+
+
+        float currentTime = fpsClock.restart().asSeconds();
+        float fps = 1.f / currentTime;
+        fpsText.setString("FPS: " + to_string(static_cast<int>(fps)));
+        window.draw(fpsText);  // Draw FPS text
 
         // show everything we just drew
         window.display();
