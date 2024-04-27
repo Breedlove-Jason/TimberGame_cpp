@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <cmath>
 #include <sstream>
+#include "Timber.h"
 
 using namespace sf;
 namespace fs = std::filesystem;

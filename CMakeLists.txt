@@ -8,6 +8,9 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
 # Add executable target with source files listed in SOURCE_FILES variable
 add_executable(Timber main.cpp
+        Timber.cpp
+        Timber.h
+        scratch.cpp
 )
 
 # Link your application with SFML libraries
