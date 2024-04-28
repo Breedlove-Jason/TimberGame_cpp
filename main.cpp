@@ -11,6 +11,10 @@ using namespace sf;
 namespace fs = std::filesystem;
 using namespace std;
 
+
+
+
+
 // function header
 void updateBranches(int seed);
 
@@ -24,6 +28,45 @@ enum class side {
 side branchPositions[NUM_BRANCHES];
 
 int main() {
+// Correctly load unique textures
+    ResourceManager::loadTexture("background", "graphics/background.png");
+    ResourceManager::loadTexture("bee", "graphics/bee.png");
+    ResourceManager::loadTexture("mainTree", "graphics/tree.png");
+    ResourceManager::loadTexture("cloud", "graphics/cloud.png"); // One texture for all clouds
+    ResourceManager::loadTexture("branch", "graphics/branch.png");
+    ResourceManager::loadTexture("player", "graphics/player.png");
+    ResourceManager::loadTexture("extraTree1", "graphics/tree2.png");
+    ResourceManager::loadTexture("extraTree2", "graphics/tree2.png"); // Assuming it's the same texture but managed separately if needed
+    ResourceManager::loadTexture("axe", "graphics/axe.png");
+    ResourceManager::loadTexture("log", "graphics/log.png");
+    ResourceManager::loadTexture("rip", "graphics/rip.png");
+
+// Load background and main elements
+    Sprite background = ResourceManager::loadSprite("background", 0, 0);
+    Sprite mainTree = ResourceManager::loadSprite("mainTree", 810, 0);
+    Sprite player = ResourceManager::loadSprite("player", 580, 720); // Player's starting position
+    Sprite axe = ResourceManager::loadSprite("axe", 700, 830); // Adjust based on actual game design
+    Sprite log = ResourceManager::loadSprite("log", 810, 720); // Starting position for the log
+    Sprite rip = ResourceManager::loadSprite("rip", 600, 860); // Position for the RIP when needed
+
+// Extra trees
+    Sprite extraTree1 = ResourceManager::loadSprite("extraTree1", 300, -125);
+    Sprite extraTree2 = ResourceManager::loadSprite("extraTree2", 1400, -200);
+
+// Bees
+    Sprite bee = ResourceManager::loadSprite("bee", 0, 800); // Starting position for the bee
+
+// Clouds - Assuming starting positions for each cloud
+    Sprite cloud1 = ResourceManager::loadSprite("cloud", 0, 0);
+    Sprite cloud2 = ResourceManager::loadSprite("cloud", 0, 250);
+    Sprite cloud3 = ResourceManager::loadSprite("cloud", 0, 500);
+
+// Branches - Assuming positions need to be set dynamically
+    std::vector<Sprite> branches(NUM_BRANCHES);
+    for (int i = 0; i < NUM_BRANCHES; ++i) {
+        branches[i] = ResourceManager::loadSprite("branch", -2000, -2000); // Initial off-screen position
+    }
+
     // random seed
     srand(static_cast<unsigned int>(time(nullptr)));  // Seed random number generator
 

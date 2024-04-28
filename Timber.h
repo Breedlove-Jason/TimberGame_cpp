@@ -12,28 +12,31 @@ using namespace sf;
 
 class ResourceManager {
 public:
-    static Sprite loadSprite(const string& textureFile, float posX, float posY);
+    static void loadTexture(const std::string& name, const std::string& filename);
+//    static sf::Sprite loadSprite(const std::string& name, float posX, float posY);
+    static sf::Sprite loadSprite(const std::string& name, float posX, float posY);
+    static sf::Texture& getTexture(const std::string& name);
+
 private:
-    static map<string, Texture> textures;
+    static std::map<std::string, sf::Texture> textures;
 };
 
 class Game {
 public:
-    Game();
-
-    void run();
+    Game();  // Constructor for setting up the game
+    void run();  // Starts the main loop of the game
 
 private:
-    RenderWindow window;
-
-    void processEvents();
-
-    void updates();
-
-    void render();
-
+    sf::RenderWindow window;  // Window for the game
     bool isPaused;
 
+    void processEvents();  // Process user input and system events
+    void update(float deltaTime);  // Update the state of the game
+    void render();  // Render the game graphics
+
+    // Add other game components as needed
+    Player player;  // Assuming Player class is defined elsewhere in Timber.h
+    // Other components like Clouds, Branches, etc.
 };
 /*
  * The Player class represents the player character in the game.

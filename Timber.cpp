@@ -9,59 +9,85 @@ Game::Game() : window(sf::VideoMode(1920, 1080), "Timber!!!"), isPaused(true) {
     // Initialization code here (load textures, set up scenes, etc.)
 }
 
-map<string, Texture> ResourceManager::textures;
+std::map<std::string, sf::Texture> ResourceManager::textures;
 
-Sprite ResourceManager::loadSprite(const string& textureFile, float posX, float posY) {
-    auto& texture = textures[textureFile];
-    if (texture.getSize().x == 0) { // Texture not yet loaded
-        if (!texture.loadFromFile(textureFile)) {
-            throw runtime_error("Failed to load texture: " + textureFile);
+void ResourceManager::loadTexture(const std::string &name, const std::string &filename) {
+    sf::Texture &tex = textures[name];
+    if (tex.getSize().x == 0) { // Check if texture is already loaded
+        if (!tex.loadFromFile(filename)) {
+            throw std::runtime_error("Failed to load texture: " + filename);
         }
     }
+}
 
-    Sprite sprite;
+sf::Sprite ResourceManager::loadSprite(const std::string &name, float posX, float posY) {
+    sf::Texture &texture = getTexture(name);
+    sf::Sprite sprite;
     sprite.setTexture(texture);
     sprite.setPosition(posX, posY);
     return sprite;
 }
 
+sf::Texture &ResourceManager::getTexture(const std::string &name) {
+    return textures.at(name);
+}
+
+Game::Game()
+        : window(sf::VideoMode(1920, 1080), "Timber!!!"), isPaused(true) {
+    // Load all necessary resources
+    ResourceManager::loadTexture("player", "graphics/player.png");
+    ResourceManager::loadSprite("player", 580, 720);
+    // Initialize other game components here
+    player = Player();  // Assuming player setup uses ResourceManager
+}
+
 void Game::run() {
-    Clock clock;
+    sf::Clock clock;
     while (window.isOpen()) {
-        Time deltaTime = clock.restart();
+        sf::Time deltaTime = clock.restart();
         processEvents();
         if (!isPaused) {
-            updates(); // might need update(deltaTime) instead
+            update(deltaTime.asSeconds());
         }
         render();
     }
 }
+
 void Game::processEvents() {
-    Event event;
+    sf::Event event;
     while (window.pollEvent(event)) {
-        if (event.type == Event::Closed) {
-            window.close();
+        switch (event.type) {
+            case sf::Event::Closed:
+                window.close();
+                break;
+                // Handle other events like keyboard input
+            case sf::Event::KeyPressed:
+            case sf::Event::KeyReleased:
+                player.handleInput(event.key.code, event.type == sf::Event::KeyPressed);
+                break;
         }
     }
 }
 
-void Game::updates() {
-    // Update game state
+void Game::update(float deltaTime) {
+    if (!isPaused) {
+        player.update(deltaTime);  // Update player's state
+        // Update other components like clouds, branches
+    }
 }
 
 void Game::render() {
     window.clear();
-    // Draw everything
+    window.draw(player.getSprite());  // Draw the player
+    // Draw other components
     window.display();
 }
 
-
-Player::Player() : movingLeft(false), movingRight(false) {
+Player::Player() {
     sprite = ResourceManager::loadSprite("graphics/player.png", 580, 720);
 }
 
 void Player::update(float deltaTime) {
-    // Use movingLeft and movingRight to update the sprite's position
     if (movingLeft) {
         sprite.move(-speed * deltaTime, 0);
     }
@@ -70,24 +96,24 @@ void Player::update(float deltaTime) {
     }
 }
 
-Sprite& Player::getSprite() {
+sf::Sprite &Player::getSprite() {
     return sprite;
 }
 
-void Player::handleInput(Keyboard::Key key, bool isPressed) {
-    if (key == Keyboard::Left) {
+void Player::handleInput(sf::Keyboard::Key key, bool isPressed) {
+    if (key == sf::Keyboard::Left) {
         movingLeft = isPressed;
-    } else if (key == Keyboard::Right) {
+    } else if (key == sf::Keyboard::Right) {
         movingRight = isPressed;
     }
 }
 
-Tree::Tree(const string&) {
+Tree::Tree(const string &) {
     sprite = ResourceManager::loadSprite("graphics/tree.png", 810, 0);
 
 }
 
-Sprite& Tree::getSprite() {
+Sprite &Tree::getSprite() {
     return sprite;
 }
 
@@ -110,7 +136,7 @@ void Cloud::update(float deltaTime) {
     }
 }
 
-void Cloud::draw(RenderWindow& window) {
+void Cloud::draw(RenderWindow &window) {
     if (active) {
         window.draw(sprite);
     }
@@ -129,8 +155,8 @@ void Cloud::setActive(bool active) {
 }
 
 
-Branch::Branch(const string&) {
-    sprite= ResourceManager::loadSprite("graphics/branch.png", 220, 20);
+Branch::Branch(const string &) {
+    sprite = ResourceManager::loadSprite("graphics/branch.png", 220, 20);
     branchSide = Side::NONE; // Default to NONE.
 }
 
@@ -154,14 +180,15 @@ void Branch::setSide(Side side) {
     }
 }
 
-Sprite& Branch::getSprite() {
+Sprite &Branch::getSprite() {
     return sprite;
 }
-Background::Background(const string& textureFile) {
+
+Background::Background(const string &textureFile) {
     sprite = ResourceManager::loadSprite(textureFile, 0, 0);
 }
 
-void Background::draw(RenderWindow& window) {
+void Background::draw(RenderWindow &window) {
     window.draw(sprite);
 }
 
@@ -179,7 +206,7 @@ void HUD::updateTime(float time) {
     timeText.setString("Time: " + to_string(time));
 }
 
-void HUD::draw(RenderWindow& window) {
+void HUD::draw(RenderWindow &window) {
     window.draw(scoreText);
     window.draw(timeText);
 }
