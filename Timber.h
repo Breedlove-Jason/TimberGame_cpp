@@ -12,13 +12,13 @@ using namespace sf;
 
 class ResourceManager {
 public:
-    static void loadTexture(const std::string& name, const std::string& filename);
+    static void loadTexture(const string& name, const string& filename);
 //    static sf::Sprite loadSprite(const std::string& name, float posX, float posY);
-    static sf::Sprite loadSprite(const std::string& name, float posX, float posY);
-    static sf::Texture& getTexture(const std::string& name);
+    static Sprite loadSprite(const string& name, float posX, float posY);
+    static Texture& getTexture(const string& name);
 
 private:
-    static std::map<std::string, sf::Texture> textures;
+    static map<string, Texture> textures;
 };
 
 class Game {
@@ -27,7 +27,7 @@ public:
     void run();  // Starts the main loop of the game
 
 private:
-    sf::RenderWindow window;  // Window for the game
+    RenderWindow window;  // Window for the game
     bool isPaused;
 
     void processEvents();  // Process user input and system events
@@ -46,11 +46,11 @@ class Player {
 public:
     Player();
     void update(float deltaTime);  // Include deltaTime for movement calculations
-    sf::Sprite& getSprite();
-    void handleInput(sf::Keyboard::Key key, bool isPressed);
+    Sprite& getSprite();
+    void handleInput(Keyboard::Key key, bool isPressed);
 
 private:
-    sf::Sprite sprite;
+    Sprite sprite;
     bool movingLeft;
     bool movingRight;
     float speed = 100.0f;  // Speed at which the player moves

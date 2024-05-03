@@ -5,35 +5,35 @@
 using namespace sf;
 using namespace std;
 
-Game::Game() : window(sf::VideoMode(1920, 1080), "Timber!!!"), isPaused(true) {
-    // Initialization code here (load textures, set up scenes, etc.)
-}
+//Game::Game() : window(VideoMode(1920, 1080), "Timber!!!"), isPaused(true) {
+//    // Initialization code here (load textures, set up scenes, etc.)
+//}
 
-std::map<std::string, sf::Texture> ResourceManager::textures;
+map<string, Texture> ResourceManager::textures;
 
-void ResourceManager::loadTexture(const std::string &name, const std::string &filename) {
-    sf::Texture &tex = textures[name];
+void ResourceManager::loadTexture(const string &name, const string &filename) {
+    Texture &tex = textures[name];
     if (tex.getSize().x == 0) { // Check if texture is already loaded
         if (!tex.loadFromFile(filename)) {
-            throw std::runtime_error("Failed to load texture: " + filename);
+            throw runtime_error("Failed to load texture: " + filename);
         }
     }
 }
 
-sf::Sprite ResourceManager::loadSprite(const std::string &name, float posX, float posY) {
-    sf::Texture &texture = getTexture(name);
-    sf::Sprite sprite;
+Sprite ResourceManager::loadSprite(const string &name, float posX, float posY) {
+    Texture &texture = getTexture(name);
+    Sprite sprite;
     sprite.setTexture(texture);
     sprite.setPosition(posX, posY);
     return sprite;
 }
 
-sf::Texture &ResourceManager::getTexture(const std::string &name) {
+Texture &ResourceManager::getTexture(const string &name) {
     return textures.at(name);
 }
 
 Game::Game()
-        : window(sf::VideoMode(1920, 1080), "Timber!!!"), isPaused(true) {
+    : window(sf::VideoMode(1920, 1080), "Timber!!!"), isPaused(true) {
     // Load all necessary resources
     ResourceManager::loadTexture("player", "graphics/player.png");
     ResourceManager::loadSprite("player", 580, 720);
@@ -60,19 +60,13 @@ void Game::processEvents() {
             case sf::Event::Closed:
                 window.close();
                 break;
-                // Handle other events like keyboard input
+            // Handle other events like keyboard input
             case sf::Event::KeyPressed:
             case sf::Event::KeyReleased:
                 player.handleInput(event.key.code, event.type == sf::Event::KeyPressed);
                 break;
-        }
-    }
-}
-
-void Game::update(float deltaTime) {
-    if (!isPaused) {
-        player.update(deltaTime);  // Update player's state
-        // Update other components like clouds, branches
+        true;  // Update player's state
+        }// Update other components like clouds, branches
     }
 }
 
@@ -82,6 +76,7 @@ void Game::render() {
     // Draw other components
     window.display();
 }
+
 
 Player::Player() {
     sprite = ResourceManager::loadSprite("graphics/player.png", 580, 720);
@@ -96,14 +91,14 @@ void Player::update(float deltaTime) {
     }
 }
 
-sf::Sprite &Player::getSprite() {
+Sprite &Player::getSprite() {
     return sprite;
 }
 
-void Player::handleInput(sf::Keyboard::Key key, bool isPressed) {
-    if (key == sf::Keyboard::Left) {
+void Player::handleInput(Keyboard::Key key, bool isPressed) {
+    if (key == Keyboard::Left) {
         movingLeft = isPressed;
-    } else if (key == sf::Keyboard::Right) {
+    } else if (key == Keyboard::Right) {
         movingRight = isPressed;
     }
 }

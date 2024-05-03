@@ -11,6 +11,25 @@ add_executable(Timber main.cpp
         Timber.cpp
         Timber.h
         scratch.cpp
+        include/Player.h
+        src/Entities/Player.cpp
+        include/ResourceManager.h
+        src/Game/Game.cpp
+        include/Game.h
+        src/Managers/ResourceManager.cpp
+        src/Managers/ResourceManager.h
+        src/Entities/Player.h
+        src/Entities/Tree.cpp
+        src/Entities/Tree.h
+        src/Entities/Cloud.cpp
+        src/Entities/Cloud.h
+        src/Entities/Branch.cpp
+        src/Entities/Branch.h
+        src/Entities/Background.cpp
+        src/Entities/Background.h
+        src/Entities/HUD.cpp
+        src/Entities/HUD.h
+        src/Game/Game.h
 )
 
 # Link your application with SFML libraries

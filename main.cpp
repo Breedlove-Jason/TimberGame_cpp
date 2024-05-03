@@ -6,6 +6,8 @@
 #include <cmath>
 #include <sstream>
 #include "Timber.h"
+#include "./src/Managers/ResourceManager.h"
+#include "src/Entities/Player.h"
 
 using namespace sf;
 namespace fs = std::filesystem;
@@ -28,6 +30,10 @@ enum class side {
 side branchPositions[NUM_BRANCHES];
 
 int main() {
+
+    Game game;
+    game.run();
+
 // Correctly load unique textures
     ResourceManager::loadTexture("background", "graphics/background.png");
     ResourceManager::loadTexture("bee", "graphics/bee.png");
@@ -230,11 +236,11 @@ int main() {
     bool acceptInput = false;
 
     // After loading textures and setting up sprites
-    Texture textureExtraTree;
-    textureExtraTree.loadFromFile("graphics/tree2.png");
-    Sprite extraTree1(textureExtraTree), extraTree2(textureExtraTree);
-    extraTree1.setPosition(300, -125);
-    extraTree2.setPosition(1400, -200);
+//    Texture textureExtraTree;
+//    textureExtraTree.loadFromFile("graphics/tree2.png");
+//    Sprite extraTree1(textureExtraTree), extraTree2(textureExtraTree);
+//    extraTree1.setPosition(300, -125);
+//    extraTree2.setPosition(1400, -200);
 
 // Initialize FPS variables and text
     Clock fpsClock;

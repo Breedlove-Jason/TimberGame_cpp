@@ -67,6 +67,54 @@ build CMakeFiles/Timber.dir/scratch.cpp.o: CXX_COMPILER__Timber_unscanned_Debug 
   OBJECT_DIR = CMakeFiles/Timber.dir
   OBJECT_FILE_DIR = CMakeFiles/Timber.dir
 
+build CMakeFiles/Timber.dir/src/Entities/Player.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Entities/Player.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Entities/Player.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Entities
+
+build CMakeFiles/Timber.dir/src/Game/Game.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Game/Game.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Game/Game.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Game
+
+build CMakeFiles/Timber.dir/src/Managers/ResourceManager.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Managers/ResourceManager.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Managers/ResourceManager.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Managers
+
+build CMakeFiles/Timber.dir/src/Entities/Tree.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Entities/Tree.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Entities/Tree.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Entities
+
+build CMakeFiles/Timber.dir/src/Entities/Cloud.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Entities/Cloud.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Entities/Cloud.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Entities
+
+build CMakeFiles/Timber.dir/src/Entities/Branch.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Entities/Branch.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Entities/Branch.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Entities
+
+build CMakeFiles/Timber.dir/src/Entities/Background.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Entities/Background.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Entities/Background.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Entities
+
+build CMakeFiles/Timber.dir/src/Entities/HUD.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/src/Entities/HUD.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/src/Entities/HUD.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir/src/Entities
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Timber
@@ -75,9 +123,9 @@ build CMakeFiles/Timber.dir/scratch.cpp.o: CXX_COMPILER__Timber_unscanned_Debug 
 #############################################
 # Link the executable Timber
 
-build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/Timber.cpp.o CMakeFiles/Timber.dir/scratch.cpp.o | /usr/lib/libsfml-graphics.so.2.6.1 /usr/lib/libsfml-audio.so.2.6.1 /usr/lib/libsfml-window.so.2.6.1 /usr/lib/libsfml-system.so.2.6.1
+build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/Timber.cpp.o CMakeFiles/Timber.dir/scratch.cpp.o CMakeFiles/Timber.dir/src/Entities/Player.cpp.o CMakeFiles/Timber.dir/src/Game/Game.cpp.o CMakeFiles/Timber.dir/src/Managers/ResourceManager.cpp.o CMakeFiles/Timber.dir/src/Entities/Tree.cpp.o CMakeFiles/Timber.dir/src/Entities/Cloud.cpp.o CMakeFiles/Timber.dir/src/Entities/Branch.cpp.o CMakeFiles/Timber.dir/src/Entities/Background.cpp.o CMakeFiles/Timber.dir/src/Entities/HUD.cpp.o | /usr/lib64/libsfml-graphics.so.2.6.1 /usr/lib64/libsfml-audio.so.2.6.1 /usr/lib64/libsfml-window.so.2.6.1 /usr/lib64/libsfml-system.so.2.6.1
   FLAGS = -g
-  LINK_LIBRARIES = /usr/lib/libsfml-graphics.so.2.6.1  /usr/lib/libsfml-audio.so.2.6.1  /usr/lib/libsfml-window.so.2.6.1  /usr/lib/libsfml-system.so.2.6.1
+  LINK_LIBRARIES = /usr/lib64/libsfml-graphics.so.2.6.1  /usr/lib64/libsfml-audio.so.2.6.1  /usr/lib64/libsfml-window.so.2.6.1  /usr/lib64/libsfml-system.so.2.6.1
   OBJECT_DIR = CMakeFiles/Timber.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -127,14 +175,14 @@ build all: phony Timber
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /home/jason/courses/cpp/Timber/CMakeLists.txt /usr/lib/cmake/SFML/SFMLConfig.cmake /usr/lib/cmake/SFML/SFMLConfigDependencies.cmake /usr/lib/cmake/SFML/SFMLConfigVersion.cmake /usr/lib/cmake/SFML/SFMLSharedTargets-release.cmake /usr/lib/cmake/SFML/SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /home/jason/courses/cpp/Timber/CMakeLists.txt /usr/lib64/cmake/SFML/SFMLConfig.cmake /usr/lib64/cmake/SFML/SFMLConfigDependencies.cmake /usr/lib64/cmake/SFML/SFMLConfigVersion.cmake /usr/lib64/cmake/SFML/SFMLSharedTargets-release.cmake /usr/lib64/cmake/SFML/SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /home/jason/courses/cpp/Timber/CMakeLists.txt /usr/lib/cmake/SFML/SFMLConfig.cmake /usr/lib/cmake/SFML/SFMLConfigDependencies.cmake /usr/lib/cmake/SFML/SFMLConfigVersion.cmake /usr/lib/cmake/SFML/SFMLSharedTargets-release.cmake /usr/lib/cmake/SFML/SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake: phony
+build /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /home/jason/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /home/jason/courses/cpp/Timber/CMakeLists.txt /usr/lib64/cmake/SFML/SFMLConfig.cmake /usr/lib64/cmake/SFML/SFMLConfigDependencies.cmake /usr/lib64/cmake/SFML/SFMLConfigVersion.cmake /usr/lib64/cmake/SFML/SFMLSharedTargets-release.cmake /usr/lib64/cmake/SFML/SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake: phony
 
 
 #############################################
