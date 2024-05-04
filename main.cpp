@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <cmath>
 #include <sstream>
+#include <string>
 
 using namespace sf;
 namespace fs = std::filesystem;
@@ -21,6 +22,9 @@ enum class side {
     LEFT, RIGHT, NONE
 };
 side branchPositions[NUM_BRANCHES];
+
+// function to generate textures, sprites, load resources, and set positions
+Sprite setupSprite(const string &filename, float posX, float posY);
 
 int main() {
     // random seed
@@ -60,35 +64,36 @@ int main() {
     bool paused = true;
 
     // check graphics module is working
-    fs::path pathToImage = fs::current_path() / "graphics/background.png";
-    cout << "Full path to image: " << pathToImage << std::endl;
-
-    ifstream file(pathToImage);
-    if (file.good()) {
-        cout << "File exists" << std::endl;
-    } else {
-        cout << "File does not exist" << std::endl;
-    }
+    // fs::path pathToImage = fs::current_path() / "graphics/background.png";
+    // cout << "Full path to image: " << pathToImage << std::endl;
+    //
+    // ifstream file(pathToImage);
+    // if (file.good()) {
+    //     cout << "File exists" << std::endl;
+    // } else {
+    //     cout << "File does not exist" << std::endl;
+    // }
     // create a video mode object
     VideoMode vm(1920, 1080);
 
     // create and open a window for the game
     RenderWindow window(vm, "Timber!!!"); // set style to fullscreen when ready Style::Fullscreen
 
+    Sprite spriteBackground = setupSprite("graphics/background.png", 0, 0);
     // create a texture to hold a graphic on the GPU
-    Texture textureBackground;
-
-    // load a graphic into the texture
-    textureBackground.loadFromFile("graphics/background.png");
-
-    // create a sprite
-    Sprite spriteBackground;
-
-    // attach the texture to the sprite
-    spriteBackground.setTexture(textureBackground);
-
-    // set the spriteBackground to cover the screen
-    spriteBackground.setPosition(0, 0);
+    // Texture textureBackground;
+    //
+    // // load a graphic into the texture
+    // textureBackground.loadFromFile("graphics/background.png");
+    //
+    // // create a sprite
+    // Sprite spriteBackground;
+    //
+    // // attach the texture to the sprite
+    // spriteBackground.setTexture(textureBackground);
+    //
+    // // set the spriteBackground to cover the screen
+    // spriteBackground.setPosition(0, 0);
 
     // make a tree sprite
 
@@ -198,7 +203,7 @@ int main() {
     fpsText.setFont(font);
     fpsText.setCharacterSize(24);
     fpsText.setFillColor(Color::White);
-    fpsText.setPosition(50, 50);  // Position the FPS counter on the screen
+    fpsText.setPosition(1500, 50);  // Position the FPS counter on the screen
 
     // chopping sound
     SoundBuffer chopBuffer;
@@ -558,4 +563,16 @@ void updateBranches(int seed) {
             branchPositions[0] = side::NONE;
             break;
     }
+}
+Sprite setupSprite(const string &filename, float posX, float posY) {
+    Texture texture;
+    if (!texture.loadFromFile(filename)) {
+        cout << "Can't load " << filename << endl;
+    } else {
+        cout << filename << " loaded" << endl;
+    }
+    Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setPosition(posX, posY);
+    return sprite;
 }
