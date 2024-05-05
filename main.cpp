@@ -6,6 +6,7 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+#include "LoadResources.h"
 
 using namespace sf;
 namespace fs = std::filesystem;
@@ -24,7 +25,7 @@ enum class side {
 side branchPositions[NUM_BRANCHES];
 
 // function to generate textures, sprites, load resources, and set positions
-Sprite setupSprite(const string &filename, float posX, float posY);
+// Sprite setupSprite(const string &filename, float posX, float posY);
 
 int main() {
     // random seed
@@ -79,7 +80,9 @@ int main() {
     // create and open a window for the game
     RenderWindow window(vm, "Timber!!!"); // set style to fullscreen when ready Style::Fullscreen
 
-    Sprite spriteBackground = setupSprite("graphics/background.png", 0, 0);
+    LoadResources background(window, "background", "spriteBackground", "graphics/background.png", 0, 0);
+    background.draw();
+    // Sprite spriteBackground = setupSprite("graphics/background.png", 0, 0);
     // create a texture to hold a graphic on the GPU
     // Texture textureBackground;
     //
@@ -509,8 +512,10 @@ int main() {
         window.clear();
 
         // draw game scene here
-        window.draw(spriteBackground);
+        background.draw();
+        // window.draw(spriteBackground);
         window.draw(spriteCloud1);
+        // window.draw(background);
         window.draw(spriteCloud2);
         window.draw(spriteCloud3);
         for (auto &branch: branches) {
@@ -564,15 +569,15 @@ void updateBranches(int seed) {
             break;
     }
 }
-Sprite setupSprite(const string &filename, float posX, float posY) {
-    Texture texture;
-    if (!texture.loadFromFile(filename)) {
-        cout << "Can't load " << filename << endl;
-    } else {
-        cout << filename << " loaded" << endl;
-    }
-    Sprite sprite;
-    sprite.setTexture(texture);
-    sprite.setPosition(posX, posY);
-    return sprite;
-}
+// Sprite setupSprite(const string &filename, float posX, float posY) {
+//     Texture texture;
+//     if (!texture.loadFromFile(filename)) {
+//         cout << "Can't load " << filename << endl;
+//     } else {
+//         cout << filename << " loaded" << endl;
+//     }
+//     Sprite sprite;
+//     sprite.setTexture(texture);
+//     sprite.setPosition(posX, posY);
+//     return sprite;
+// }

@@ -61,6 +61,18 @@ build CMakeFiles/Timber.dir/ResourceManager.cpp.o: CXX_COMPILER__Timber_unscanne
   OBJECT_DIR = CMakeFiles/Timber.dir
   OBJECT_FILE_DIR = CMakeFiles/Timber.dir
 
+build CMakeFiles/Timber.dir/Player.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/Player.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/Player.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir
+
+build CMakeFiles/Timber.dir/LoadResources.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/LoadResources.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/LoadResources.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Timber
@@ -69,7 +81,7 @@ build CMakeFiles/Timber.dir/ResourceManager.cpp.o: CXX_COMPILER__Timber_unscanne
 #############################################
 # Link the executable Timber
 
-build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/ResourceManager.cpp.o | /usr/lib64/libsfml-graphics.so.2.6.1 /usr/lib64/libsfml-audio.so.2.6.1 /usr/lib64/libsfml-window.so.2.6.1 /usr/lib64/libsfml-system.so.2.6.1
+build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/ResourceManager.cpp.o CMakeFiles/Timber.dir/Player.cpp.o CMakeFiles/Timber.dir/LoadResources.cpp.o | /usr/lib64/libsfml-graphics.so.2.6.1 /usr/lib64/libsfml-audio.so.2.6.1 /usr/lib64/libsfml-window.so.2.6.1 /usr/lib64/libsfml-system.so.2.6.1
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib64/libsfml-graphics.so.2.6.1  /usr/lib64/libsfml-audio.so.2.6.1  /usr/lib64/libsfml-window.so.2.6.1  /usr/lib64/libsfml-system.so.2.6.1
   OBJECT_DIR = CMakeFiles/Timber.dir

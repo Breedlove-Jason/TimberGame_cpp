@@ -10,6 +10,10 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 add_executable(Timber main.cpp
         ResourceManager.cpp
         ResourceManager.h
+        Player.cpp
+        Player.h
+        LoadResources.cpp
+        LoadResources.h
 )
 
 # Link your application with SFML libraries
