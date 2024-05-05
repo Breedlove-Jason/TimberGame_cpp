@@ -22,6 +22,7 @@ Sprite branches[NUM_BRANCHES];
 enum class side {
     LEFT, RIGHT, NONE
 };
+
 side branchPositions[NUM_BRANCHES];
 
 // function to generate textures, sprites, load resources, and set positions
@@ -29,7 +30,7 @@ side branchPositions[NUM_BRANCHES];
 
 int main() {
     // random seed
-    srand(static_cast<unsigned int>(time(nullptr)));  // Seed random number generator
+    srand(static_cast<unsigned int>(time(nullptr))); // Seed random number generator
 
     int score = 0;
 
@@ -81,49 +82,18 @@ int main() {
     RenderWindow window(vm, "Timber!!!"); // set style to fullscreen when ready Style::Fullscreen
 
     LoadResources background(window, "background", "spriteBackground", "graphics/background.png", 0, 0);
-    background.draw();
-    // Sprite spriteBackground = setupSprite("graphics/background.png", 0, 0);
-    // create a texture to hold a graphic on the GPU
-    // Texture textureBackground;
-    //
-    // // load a graphic into the texture
-    // textureBackground.loadFromFile("graphics/background.png");
-    //
-    // // create a sprite
-    // Sprite spriteBackground;
-    //
-    // // attach the texture to the sprite
-    // spriteBackground.setTexture(textureBackground);
-    //
-    // // set the spriteBackground to cover the screen
-    // spriteBackground.setPosition(0, 0);
 
-    // make a tree sprite
+    LoadResources tree(window, "tree", "spriteTree", "graphics/tree.png", 810, 0);
 
-    Texture textureTree;
-    if (!textureTree.loadFromFile("graphics/tree.png")) {
-        cout << "Can't load tree" << endl;
-    } else {
-        cout << "Tree loaded" << endl;
-
-        textureTree.loadFromFile("graphics/tree.png");
-    }
-    Sprite spriteTree;
-    spriteTree.setTexture(textureTree);
-    spriteTree.setPosition(810, 0);
-
-    // prepare the bee
-    Texture textureBee;
-    textureBee.loadFromFile("graphics/bee.png");
-    Sprite spriteBee;
-    spriteBee.setTexture(textureBee);
-    spriteBee.setPosition(0, 800);
+    LoadResources bee(window, "bee", "spriteBee", "graphics/bee.png", 0, 800);
+    bee.setActive(false);
+    bee.setSpeed(200.0f);
 
     // Is the bee currently moving?
-    bool beeActive = false;
+    // bool beeActive = false;
 
     // How fast can the bee fly
-    float beeSpeed = 0.0f;
+    // float beeSpeed = 0.0f;
 
     // prepare the clouds
     Texture textureCloud;
@@ -200,13 +170,13 @@ int main() {
     extraTree1.setPosition(300, -125);
     extraTree2.setPosition(1400, -200);
 
-// Initialize FPS variables and text
+    // Initialize FPS variables and text
     Clock fpsClock;
     Text fpsText;
     fpsText.setFont(font);
     fpsText.setCharacterSize(24);
     fpsText.setFillColor(Color::White);
-    fpsText.setPosition(1500, 50);  // Position the FPS counter on the screen
+    fpsText.setPosition(1500, 50); // Position the FPS counter on the screen
 
     // chopping sound
     SoundBuffer chopBuffer;
@@ -274,7 +244,7 @@ int main() {
         textureBranch.loadFromFile("graphics/branch.png");
 
         // set the texture for each branch sprite
-        for (auto & branch : branches) {
+        for (auto&branch: branches) {
             branch.setTexture(textureBranch);
             branch.setPosition(-2000, -2000);
             branch.setOrigin(220, 20);
@@ -300,7 +270,6 @@ int main() {
             spritePlayer.setPosition(675, 660);
 
             acceptInput = true;
-
         }
         // wrap player controls to accept input
         if (acceptInput) {
@@ -369,40 +338,37 @@ int main() {
             }
 
             // setup the bee
-            if (!beeActive) {
+            if (!bee.isActive()) {
                 // how fast is the bee
-//                srand((int) time(0));
-                beeSpeed = (rand() % 200) + 200;
+                bee.setSpeed((rand() % 200) + 200);
 
                 // how high is the bee
-//                srand((int) time(0) * 10);
                 float height = (rand() % 500) + 500;
-                spriteBee.setPosition(2000, height);
-                beeActive = true;
-            } else {
+                bee.setDirection(-1.0f, 0.0f); // Make the bee move to the left
+                bee.setActive(true);
+            }
+            else {
                 // move the bee
-                spriteBee.setPosition(spriteBee.getPosition().x - (beeSpeed * dt.asSeconds()),
-                                      spriteBee.getPosition().y);
-                if (spriteBee.getPosition().x < -100) {
-                    beeActive = false;
+                bee.move(dt.asSeconds());
+                if (bee.getSprite().getPosition().x < -100) {
+                    bee.setActive(false);
                 }
             }
-
             // manage the clouds
             // cloud 1
             if (!cloud1Active) {
-
                 // how fast is the cloud
-                srand((int) time(0) * 10);
+                srand((int)time(0) * 10);
                 cloud1Speed = (rand() % 200);
 
                 // how high is the cloud
-                srand((int) time(0) * 10);
+                srand((int)time(0) * 10);
                 float height = (rand() % 150);
                 spriteCloud1.setPosition(-200, height);
 
                 cloud1Active = true;
-            } else {
+            }
+            else {
                 spriteCloud1.setPosition(spriteCloud1.getPosition().x + (cloud1Speed * dt.asSeconds()),
                                          spriteCloud1.getPosition().y);
 
@@ -413,18 +379,18 @@ int main() {
             }
             // cloud 2
             if (!cloud2Active) {
-
                 // how fast is the cloud
-                srand((int) time(0) * 20);
+                srand((int)time(0) * 20);
                 cloud2Speed = (rand() % 200);
 
                 // how high is the cloud
-                srand((int) time(0) * 20);
+                srand((int)time(0) * 20);
                 float height = (rand() % 300) - 150;
                 spriteCloud2.setPosition(-200, height);
 
                 cloud2Active = true;
-            } else {
+            }
+            else {
                 spriteCloud2.setPosition(spriteCloud2.getPosition().x + (cloud2Speed * dt.asSeconds()),
                                          spriteCloud2.getPosition().y);
 
@@ -434,18 +400,18 @@ int main() {
                 }
             }
             if (!cloud3Active) {
-
                 // how fast is the cloud
-                srand((int) time(0) * 30);
+                srand((int)time(0) * 30);
                 cloud3Speed = (rand() % 200);
 
                 // how high is the cloud
-                srand((int) time(0) * 30);
+                srand((int)time(0) * 30);
                 float height = (rand() % 450) - 150;
                 spriteCloud3.setPosition(-200, height);
 
                 cloud3Active = true;
-            } else {
+            }
+            else {
                 spriteCloud3.setPosition(spriteCloud3.getPosition().x + (cloud3Speed * dt.asSeconds()),
                                          spriteCloud3.getPosition().y);
 
@@ -467,12 +433,14 @@ int main() {
                     branches[i].setPosition(610, height);
                     // flip the sprite round the other way
                     branches[i].setRotation(180);
-                } else if (branchPositions[i] == side::RIGHT) {
+                }
+                else if (branchPositions[i] == side::RIGHT) {
                     // move the sprite to the right side
                     branches[i].setPosition(1330, height);
                     // set the sprite rotation to normal
                     branches[i].setRotation(0);
-                } else {
+                }
+                else {
                     // hide the branch
                     branches[i].setPosition(3000, height);
                 }
@@ -493,7 +461,7 @@ int main() {
 
                 // Display gravestone and update the message
                 spriteRIP.setPosition(525, 760);
-                spritePlayer.setPosition(2000, 660);  // Hide player
+                spritePlayer.setPosition(2000, 660); // Hide player
                 messageText.setString("SQUISHED!!");
                 FloatRect textRect = messageText.getLocalBounds();
                 messageText.setOrigin(textRect.width / 2, textRect.height / 2);
@@ -513,15 +481,14 @@ int main() {
 
         // draw game scene here
         background.draw();
-        // window.draw(spriteBackground);
+        tree.draw();
+        bee.draw();
         window.draw(spriteCloud1);
-        // window.draw(background);
         window.draw(spriteCloud2);
         window.draw(spriteCloud3);
-        for (auto &branch: branches) {
+        for (auto&branch: branches) {
             window.draw(branch);
         }
-        window.draw(spriteTree);
         window.draw(extraTree1);
         window.draw(extraTree2);
         window.draw(spritePlayer);
@@ -529,7 +496,7 @@ int main() {
         window.draw(spriteLog);
         window.draw(spriteRIP);
         window.draw(timeBar);
-        window.draw(spriteBee);
+        // window.draw(spriteBee);
         window.draw(scoreText);
         if (paused) {
             window.draw(messageText);
@@ -538,11 +505,10 @@ int main() {
         float currentTime = fpsClock.restart().asSeconds();
         float fps = 1.f / currentTime;
         fpsText.setString("FPS: " + to_string(static_cast<int>(fps)));
-        window.draw(fpsText);  // Draw FPS text
+        window.draw(fpsText); // Draw FPS text
 
         // show everything we just drew
         window.display();
-
     }
     return 0;
 }
@@ -555,7 +521,7 @@ void updateBranches(int seed) {
     }
 
     // spawn a new branch at position 0
-    srand((int) time(0) + seed);
+    srand((int)time(0) + seed);
     int r = (rand() % 5);
     switch (r) {
         case 0:
@@ -569,6 +535,7 @@ void updateBranches(int seed) {
             break;
     }
 }
+
 // Sprite setupSprite(const string &filename, float posX, float posY) {
 //     Texture texture;
 //     if (!texture.loadFromFile(filename)) {
