@@ -1,9 +1,7 @@
 #include "LoadResources.h"
 
-LoadResources::LoadResources(RenderWindow&window, const string&textureName, const string&spriteName,
-                             const string&filename, const int positionX, const int positionY)
-    : window(window), active(false), speed(0.0f), direction(0.0f, 0.0f) {
-    // Initialize active, speed and direction here
+LoadResources::LoadResources(RenderWindow& window, const string& textureName, const string& spriteName, const string& filename, const int positionX, const int positionY, const Vector2f& direction, float speed)
+: window(window), beeActive(false), beeSpeed(speed), direction(direction) {
     this->textureName = textureName;
     this->spriteName = spriteName;
     this->filename = filename;
@@ -13,7 +11,7 @@ LoadResources::LoadResources(RenderWindow&window, const string&textureName, cons
     createSprite();
 }
 
-void LoadResources::setTextureName(const string&textureName) {
+void LoadResources::setTextureName(const string& textureName) {
     this->textureName = textureName;
 }
 
@@ -28,41 +26,44 @@ void LoadResources::createSprite() {
     sprite.setPosition(positionX, positionY);
 }
 
-void LoadResources::draw() {
-    window.draw(sprite);
-}
-
 Sprite& LoadResources::getSprite() {
     return sprite;
 }
 
-bool LoadResources::isActive() const {
-    return active;
-}
-
-void LoadResources::setActive(bool active) {
-    this->active = active;
-}
-
-float LoadResources::getSpeed() const {
-    return speed;
-}
-
-void LoadResources::setSpeed(float speed) {
-    this->speed = speed;
-}
-
-void LoadResources::setDirection(float dx, float dy) {
-    direction.x = dx;
-    direction.y = dy;
+void LoadResources::draw() {
+    window.draw(sprite);
 }
 
 void LoadResources::move(float dt) {
-    if (active) {
-        sprite.setPosition(sprite.getPosition() + direction * speed * dt);
+    if (beeActive) {
+        sprite.setPosition(sprite.getPosition() + direction * beeSpeed * dt);
         if (sprite.getPosition().x < -100) {
-            sprite.setPosition(2000, sprite.getPosition().y);
-            // Set the sprite's position to the right side of the screen
+            sprite.setPosition(2000, sprite.getPosition().y); // Set the sprite's position to the right side of the screen
         }
     }
+}
+
+bool LoadResources::isActive() const {
+    return beeActive;
+}
+
+void LoadResources::setActive(bool active) {
+    beeActive = active;
+}
+
+float LoadResources::getSpeed() const {
+    return beeSpeed;
+}
+
+void LoadResources::setSpeed(float speed) {
+    beeSpeed = speed;
+}
+
+Vector2f LoadResources::getDirection() const {
+    return direction;
+}
+
+void LoadResources::setDirection(float x, float y) {
+    direction.x = x;
+    direction.y = y;
 }

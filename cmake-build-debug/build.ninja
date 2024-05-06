@@ -55,12 +55,6 @@ build CMakeFiles/Timber.dir/main.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /ho
   OBJECT_DIR = CMakeFiles/Timber.dir
   OBJECT_FILE_DIR = CMakeFiles/Timber.dir
 
-build CMakeFiles/Timber.dir/ResourceManager.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/ResourceManager.cpp || cmake_object_order_depends_target_Timber
-  DEP_FILE = CMakeFiles/Timber.dir/ResourceManager.cpp.o.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/Timber.dir
-  OBJECT_FILE_DIR = CMakeFiles/Timber.dir
-
 build CMakeFiles/Timber.dir/Player.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/Player.cpp || cmake_object_order_depends_target_Timber
   DEP_FILE = CMakeFiles/Timber.dir/Player.cpp.o.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -73,6 +67,12 @@ build CMakeFiles/Timber.dir/LoadResources.cpp.o: CXX_COMPILER__Timber_unscanned_
   OBJECT_DIR = CMakeFiles/Timber.dir
   OBJECT_FILE_DIR = CMakeFiles/Timber.dir
 
+build CMakeFiles/Timber.dir/MoveableObject.cpp.o: CXX_COMPILER__Timber_unscanned_Debug /home/jason/courses/cpp/Timber/MoveableObject.cpp || cmake_object_order_depends_target_Timber
+  DEP_FILE = CMakeFiles/Timber.dir/MoveableObject.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Timber.dir
+  OBJECT_FILE_DIR = CMakeFiles/Timber.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Timber
@@ -81,7 +81,7 @@ build CMakeFiles/Timber.dir/LoadResources.cpp.o: CXX_COMPILER__Timber_unscanned_
 #############################################
 # Link the executable Timber
 
-build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/ResourceManager.cpp.o CMakeFiles/Timber.dir/Player.cpp.o CMakeFiles/Timber.dir/LoadResources.cpp.o | /usr/lib64/libsfml-graphics.so.2.6.1 /usr/lib64/libsfml-audio.so.2.6.1 /usr/lib64/libsfml-window.so.2.6.1 /usr/lib64/libsfml-system.so.2.6.1
+build Timber: CXX_EXECUTABLE_LINKER__Timber_Debug CMakeFiles/Timber.dir/main.cpp.o CMakeFiles/Timber.dir/Player.cpp.o CMakeFiles/Timber.dir/LoadResources.cpp.o CMakeFiles/Timber.dir/MoveableObject.cpp.o | /usr/lib64/libsfml-graphics.so.2.6.1 /usr/lib64/libsfml-audio.so.2.6.1 /usr/lib64/libsfml-window.so.2.6.1 /usr/lib64/libsfml-system.so.2.6.1
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib64/libsfml-graphics.so.2.6.1  /usr/lib64/libsfml-audio.so.2.6.1  /usr/lib64/libsfml-window.so.2.6.1  /usr/lib64/libsfml-system.so.2.6.1
   OBJECT_DIR = CMakeFiles/Timber.dir
